@@ -11,15 +11,24 @@ const ProductDetails = () => {
                 console.log(err);
             })
     }, []);
-    const Details = (id) => { 
+    let visitCount = [];
+    if (product) {
+        product.forEach(item => {
+            visitCount.push(item.viewCount);
+        });
+    }
+    const sum = visitCount.reduce((partialSum, a) => partialSum + a, 0);
+    const Details = (id) => {
         Router.push(`/tour/${id}`)
     }
     return (
         <div className='container'>
-            <h2 className='my-3 fw-bold text-danger'>Trending Tours</h2>
+            <h3 className='my-3 fw-bold text-danger'><span className='me-2'>Trending Tours </span>
+            {sum ? sum :null}
+            </h3>
             {
                 product ?
-                    
+
                     <table className="table table-striped table-hover">
                         <thead className="bg-dark text-white text-center">
                             <tr>
